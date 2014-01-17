@@ -1,0 +1,35 @@
+.most_viewed_stats_date {
+	color: #333333;
+ 	text-align: left;
+	margin: 10px 0 0 0;
+}
+
+.BlogWorthy_most_viewed_post {
+	background: transparent;    
+	border-bottom: 1px solid #cccccc;
+	behavior: url(pie/PIE.htc);
+	padding: 10px;
+
+}
+.BlogWorthy_most_viewed_post .BlogWorthy_thumb_image
+{
+	float: left;
+    margin: 16px 5px 0 0;
+    width: 50px;
+}
+
+
+.BlogWorthy_most_viewed_post_date {
+	border-top: 1px solid #cccccc;
+	color: #fff;
+	padding-top: 10px;
+	margin: 10px 0 0 0;
+}
+
+.BlogWorthy_most_viewed_post_contents {
+	color: #fff;
+	margin: 10px 0 0 0;
+	width: 185px;
+}
+
+
