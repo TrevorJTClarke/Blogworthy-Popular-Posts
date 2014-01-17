@@ -1,7 +1,7 @@
 <?php
-if(!class_exists('WP_Plugin_Template_Settings'))
+if(!class_exists('Blogworthy_Popular_Posts_Settings'))
 {
-	class WP_Plugin_Template_Settings
+	class Blogworthy_Popular_Posts_Settings
 	{
 		/**
 		 * Construct the plugin object
@@ -19,34 +19,34 @@ if(!class_exists('WP_Plugin_Template_Settings'))
         public function admin_init()
         {
         	// register your plugin's settings
-        	register_setting('wp_plugin_template-group', 'setting_a');
-        	register_setting('wp_plugin_template-group', 'setting_b');
+        	register_setting('blogworthy_popular_posts-group', 'setting_a');
+        	register_setting('blogworthy_popular_posts-group', 'setting_b');
 
         	// add your settings section
         	add_settings_section(
-        	    'wp_plugin_template-section', 
-        	    'WP Plugin Template Settings', 
-        	    array(&$this, 'settings_section_wp_plugin_template'), 
-        	    'wp_plugin_template'
+        	    'blogworthy_popular_posts-section', 
+        	    'Blogworthy Popular Posts Settings', 
+        	    array(&$this, 'settings_section_blogworthy_popular_posts'), 
+        	    'blogworthy_popular_posts'
         	);
         	
         	// add your setting's fields
             add_settings_field(
-                'wp_plugin_template-setting_a', 
+                'blogworthy_popular_posts-setting_a', 
                 'Setting A', 
                 array(&$this, 'settings_field_input_text'), 
-                'wp_plugin_template', 
-                'wp_plugin_template-section',
+                'blogworthy_popular_posts', 
+                'blogworthy_popular_posts-section',
                 array(
                     'field' => 'setting_a'
                 )
             );
             add_settings_field(
-                'wp_plugin_template-setting_b', 
+                'blogworthy_popular_posts-setting_b', 
                 'Setting B', 
                 array(&$this, 'settings_field_input_text'), 
-                'wp_plugin_template', 
-                'wp_plugin_template-section',
+                'blogworthy_popular_posts', 
+                'blogworthy_popular_posts-section',
                 array(
                     'field' => 'setting_b'
                 )
@@ -80,10 +80,10 @@ if(!class_exists('WP_Plugin_Template_Settings'))
         {
             // Add a page to manage this plugin's settings
         	add_options_page(
-        	    'WP Plugin Template Settings', 
-        	    'WP Plugin Template', 
+        	    'Blogworthy Popular Posts Settings', 
+        	    'Blogworthy Popular Posts', 
         	    'manage_options', 
-        	    'wp_plugin_template', 
+        	    'blogworthy_popular_posts', 
         	    array(&$this, 'plugin_settings_page')
         	);
         } // END public function add_menu()
@@ -93,10 +93,10 @@ if(!class_exists('WP_Plugin_Template_Settings'))
          */		
         public function plugin_settings_page()
         {
-        	if(!current_user_can('manage_options'))
-        	{
-        		wp_die(__('You do not have sufficient permissions to access this page.'));
-        	}
+        	// if(!current_user_can('manage_options'))
+        	// {
+        	// 	wp_die(__('You do not have sufficient permissions to access this page.'));
+        	// }
 	
         	// Render the settings template
         	include(sprintf("%s/templates/settings.php", dirname(__FILE__)));

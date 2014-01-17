@@ -35,12 +35,16 @@ if(!class_exists('Blogworthy_Popular_Posts'))
 		public function __construct()
 		{
         	// Initialize Settings
-            require_once(sprintf("%s/settings.php", dirname(__FILE__)));
-            $WP_Plugin_Template_Settings = new WP_Plugin_Template_Settings();
+            require_once(sprintf("%s/lib/settings.php", dirname(__FILE__)));
+            $Blogworthy_Popular_Posts_Settings = new Blogworthy_Popular_Posts_Settings();
+
+            // Initialize GAPI Class
+            // require_once(sprintf("%s/lib/gapi.class.php", dirname(__FILE__)));
+            // $GAPI = new GAPI();
         	
         	// Register custom post types
-            require_once(sprintf("%s/posts/posts_template.php", dirname(__FILE__)));
-            $Post_Type_Template = new Post_Type_Template();
+            // require_once(sprintf("%s/posts/posts_template.php", dirname(__FILE__)));
+            // $Popular_Post_Type_Template = new Popular_Post_Type_Template();
 		} // END public function __construct
 	    
 		/**
@@ -74,7 +78,7 @@ if(class_exists('Blogworthy_Popular_Posts'))
     if(isset($blogworthy_popular_posts))
     {
         // Add the settings link to the plugins page
-        function plugin_settings_link($links)
+        function blogworthy_settings_link($links)
         { 
             $settings_link = '<a href="options-general.php?page=blogworthy_popular_posts">Settings</a>'; 
             array_unshift($links, $settings_link); 
@@ -82,6 +86,12 @@ if(class_exists('Blogworthy_Popular_Posts'))
         }
 
         $plugin = plugin_basename(__FILE__); 
-        add_filter("plugin_action_links_$plugin", 'plugin_settings_link');
+        add_filter("plugin_action_links_$plugin", 'blogworthy_settings_link');
+
+        //Add Blogworthy Popular Posts to settings panel
+        // function BlogworthyPopularPosts_menu() {
+        //     add_options_page('Blogworthy Popular Posts', 'Blogworthy Popular Posts', 8, __FILE__, 'BlogWorthyMostViewedPosts_options');
+        // }
+        // add_action('admin_menu', 'BlogworthyPopularPosts_menu');
     }
 }
