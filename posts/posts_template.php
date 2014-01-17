@@ -1,10 +1,10 @@
 <?php
-if(!class_exists('Post_Type_Template'))
+if(!class_exists('Popular_Post_Type_Template'))
 {
 	/**
 	 * A PostTypeTemplate class that provides 3 additional meta fields
 	 */
-	class Post_Type_Template
+	class Popular_Post_Type_Template
 	{
 		const POST_TYPE	= "post-type-template";
 		private $_meta	= array(
@@ -96,7 +96,7 @@ if(!class_exists('Post_Type_Template'))
     	{
     		// Add this metabox to every selected post
     		add_meta_box( 
-    			sprintf('wp_plugin_template_%s_section', self::POST_TYPE),
+    			sprintf('blogworthy_popular_posts_%s_section', self::POST_TYPE),
     			sprintf('%s Information', ucwords(str_replace("_", " ", self::POST_TYPE))),
     			array(&$this, 'add_inner_meta_boxes'),
     			self::POST_TYPE

@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: WP Plugin Template
-Plugin URI: https://github.com/fyaconiello/wp_plugin_template
-Description: A simple wordpress plugin template
-Version: 1.0
-Author: Francis Yaconiello
-Author URI: http://www.yaconiello.com
+Plugin Name: Blogworthy Popular Posts
+Plugin URI: http://blogworthy.com/
+Description: This plugin uses Google Analytics API to fetch data from your analytics account and displays most viewed posts in the widget.
+Version: 0.1.0
+Author: Trevor Clarke
+Author URI: https://github.com/TrevorJTClarke
 License: GPL2
 */
 /*
@@ -25,9 +25,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if(!class_exists('WP_Plugin_Template'))
+if(!class_exists('Blogworthy_Popular_Posts'))
 {
-	class WP_Plugin_Template
+	class Blogworthy_Popular_Posts
 	{
 		/**
 		 * Construct the plugin object
@@ -39,7 +39,7 @@ if(!class_exists('WP_Plugin_Template'))
             $WP_Plugin_Template_Settings = new WP_Plugin_Template_Settings();
         	
         	// Register custom post types
-            require_once(sprintf("%s/post-types/post_type_template.php", dirname(__FILE__)));
+            require_once(sprintf("%s/posts/posts_template.php", dirname(__FILE__)));
             $Post_Type_Template = new Post_Type_Template();
 		} // END public function __construct
 	    
@@ -58,25 +58,25 @@ if(!class_exists('WP_Plugin_Template'))
 		{
 			// Do nothing
 		} // END public static function deactivate
-	} // END class WP_Plugin_Template
-} // END if(!class_exists('WP_Plugin_Template'))
+	} // END class Blogworthy_Popular_Posts
+} // END if(!class_exists('Blogworthy_Popular_Posts'))
 
-if(class_exists('WP_Plugin_Template'))
+if(class_exists('Blogworthy_Popular_Posts'))
 {
 	// Installation and uninstallation hooks
-	register_activation_hook(__FILE__, array('WP_Plugin_Template', 'activate'));
-	register_deactivation_hook(__FILE__, array('WP_Plugin_Template', 'deactivate'));
+	register_activation_hook(__FILE__, array('Blogworthy_Popular_Posts', 'activate'));
+	register_deactivation_hook(__FILE__, array('Blogworthy_Popular_Posts', 'deactivate'));
 
 	// instantiate the plugin class
-	$wp_plugin_template = new WP_Plugin_Template();
+	$blogworthy_popular_posts = new Blogworthy_Popular_Posts();
 	
     // Add a link to the settings page onto the plugin page
-    if(isset($wp_plugin_template))
+    if(isset($blogworthy_popular_posts))
     {
         // Add the settings link to the plugins page
         function plugin_settings_link($links)
         { 
-            $settings_link = '<a href="options-general.php?page=wp_plugin_template">Settings</a>'; 
+            $settings_link = '<a href="options-general.php?page=blogworthy_popular_posts">Settings</a>'; 
             array_unshift($links, $settings_link); 
             return $links; 
         }
