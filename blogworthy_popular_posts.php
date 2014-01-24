@@ -36,15 +36,13 @@ if(!class_exists('Blogworthy_Popular_Posts'))
 		{
         	// Initialize Settings
             require_once(sprintf("%s/lib/settings.php", dirname(__FILE__)));
-            $Blogworthy_Popular_Posts_Settings = new Blogworthy_Popular_Posts_Settings();
 
             // Initialize GAPI Class
-            // require_once(sprintf("%s/lib/gapi.class.php", dirname(__FILE__)));
-            // $GAPI = new GAPI();
-        	
-        	// Register custom post types
-            // require_once(sprintf("%s/posts/posts_template.php", dirname(__FILE__)));
-            // $Popular_Post_Type_Template = new Popular_Post_Type_Template();
+            require_once(sprintf("%s/lib/gapi.class.php", dirname(__FILE__)));
+            // $GAPI = new gapi();
+            
+            if ( ! defined( 'BPP_PLUGIN_URL' ) )
+                define( 'BPP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 		} // END public function __construct
 	    
 		/**
@@ -78,15 +76,19 @@ if(class_exists('Blogworthy_Popular_Posts'))
     if(isset($blogworthy_popular_posts))
     {
         // Add the settings link to the plugins page
+        if( is_admin() )
+            $Blogworthy_Popular_Posts_Settings = new Blogworthy_Popular_Posts_Settings();
         function blogworthy_settings_link($links)
         { 
-            $settings_link = '<a href="options-general.php?page=blogworthy_popular_posts">Settings</a>'; 
+            $settings_link = '<a href="options-general.php?page=blogworthy-popular-posts">Settings</a>'; 
             array_unshift($links, $settings_link); 
             return $links; 
         }
 
         $plugin = plugin_basename(__FILE__); 
         add_filter("plugin_action_links_$plugin", 'blogworthy_settings_link');
+
+        // add_menu_page('Plugin Settings', 'Settings', 'administrator', __FILE__, 'baw_settings_page', get_stylesheet_directory_uri('stylesheet_directory')."/images/media-button-other.gif");
 
         //Add Blogworthy Popular Posts to settings panel
         // function BlogworthyPopularPosts_menu() {

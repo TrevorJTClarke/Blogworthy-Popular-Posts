@@ -1,105 +1,127 @@
 <?php
 if(!class_exists('Blogworthy_Popular_Posts_Settings'))
 {
-	class Blogworthy_Popular_Posts_Settings
-	{
-		/**
-		 * Construct the plugin object
-		 */
-		public function __construct()
-		{
-			// register actions
-            add_action('admin_init', array(&$this, 'admin_init'));
-        	add_action('admin_menu', array(&$this, 'add_menu'));
-		} // END public function __construct
-		
-        /**
-         * hook into WP's admin_init action hook
-         */
-        public function admin_init()
-        {
-        	// register your plugin's settings
-        	register_setting('blogworthy_popular_posts-group', 'setting_a');
-        	register_setting('blogworthy_popular_posts-group', 'setting_b');
+    class Blogworthy_Popular_Posts_Settings {
+    /**
+     * Holds the values to be used in the fields callbacks
+     */
+    private $options;
 
-        	// add your settings section
-        	add_settings_section(
-        	    'blogworthy_popular_posts-section', 
-        	    'Blogworthy Popular Posts Settings', 
-        	    array(&$this, 'settings_section_blogworthy_popular_posts'), 
-        	    'blogworthy_popular_posts'
-        	);
-        	
-        	// add your setting's fields
-            add_settings_field(
-                'blogworthy_popular_posts-setting_a', 
-                'Setting A', 
-                array(&$this, 'settings_field_input_text'), 
-                'blogworthy_popular_posts', 
-                'blogworthy_popular_posts-section',
-                array(
-                    'field' => 'setting_a'
-                )
-            );
-            add_settings_field(
-                'blogworthy_popular_posts-setting_b', 
-                'Setting B', 
-                array(&$this, 'settings_field_input_text'), 
-                'blogworthy_popular_posts', 
-                'blogworthy_popular_posts-section',
-                array(
-                    'field' => 'setting_b'
-                )
-            );
-            // Possibly do additional admin_init tasks
-        } // END public static function activate
-        
-        public function settings_section_wp_plugin_template()
-        {
-            // Think of this as help text for the section.
-            echo 'These settings do things for the WP Plugin Template.';
-        }
-        
-        /**
-         * This function provides text inputs for settings fields
-         */
-        public function settings_field_input_text($args)
-        {
-            // Get the field name from the $args array
-            $field = $args['field'];
-            // Get the value of this setting
-            $value = get_option($field);
-            // echo a proper input type="text"
-            echo sprintf('<input type="text" name="%s" id="%s" value="%s" />', $field, $field, $value);
-        } // END public function settings_field_input_text($args)
-        
-        /**
-         * add a menu
-         */		
-        public function add_menu()
-        {
-            // Add a page to manage this plugin's settings
-        	add_options_page(
-        	    'Blogworthy Popular Posts Settings', 
-        	    'Blogworthy Popular Posts', 
-        	    'manage_options', 
-        	    'blogworthy_popular_posts', 
-        	    array(&$this, 'plugin_settings_page')
-        	);
-        } // END public function add_menu()
-    
-        /**
-         * Menu Callback
-         */		
-        public function plugin_settings_page()
-        {
-        	// if(!current_user_can('manage_options'))
-        	// {
-        	// 	wp_die(__('You do not have sufficient permissions to access this page.'));
-        	// }
-	
-        	// Render the settings template
-        	include(sprintf("%s/templates/settings.php", dirname(__FILE__)));
-        } // END public function plugin_settings_page()
-    } // END class WP_Plugin_Template_Settings
-} // END if(!class_exists('WP_Plugin_Template_Settings'))
+    /**
+     * Start up
+     */
+    public function __construct()
+    {
+        add_action( 'admin_menu', array( $this, 'add_blogworthy_popular_posts_page' ) );
+        add_action( 'admin_init', array( $this, 'bpp_init' ) );
+    }
+
+    /**
+     * Add options page
+     */
+    public function add_blogworthy_popular_posts_page()
+    {
+        // This page will be under "Settings"
+        add_options_page(
+            'Blogworthy Popular Posts', 
+            'Blogworthy Popular Posts Settings', 
+            'manage_options', 
+            'blogworthy-popular-posts', 
+            array( $this, 'create_blogworthy_popular_posts_page' )
+        );
+    }
+
+    /**
+     * Options page callback
+     */
+    public function create_blogworthy_popular_posts_page()
+    {
+        // Set class property
+        $this->options = get_option( 'bpp_setting_options' );
+        require_once(sprintf("%s/templates/settings.php", dirname(__FILE__)));
+    }
+
+    /**
+     * Register and add settings
+     */
+    public function bpp_init()
+    {        
+        register_setting(
+            'bpp_ga_settings', // Option group
+            'bpp_setting_options', // Option name
+            array( $this, 'sanitize' ) // Sanitize
+        );
+
+        add_settings_section(
+            'bpp_setting_ga_creds', // ID
+            'Google Analytics Credentials',
+            array( $this, 'print_section_info' ), // Callback
+            'blogworthy-popular-posts' // Page
+        );  
+
+        add_settings_field(
+            'ga_id_number', // ID
+            'GA ID Number', // Title 
+            array( $this, 'id_number_callback' ), // Callback
+            'blogworthy-popular-posts', // Page
+            'bpp_setting_ga_creds' // Section           
+        );      
+
+        add_settings_field(
+            'ga_email', 
+            'GA Login Email', 
+            array( $this, 'ga_email_callback' ), 
+            'blogworthy-popular-posts', 
+            'bpp_setting_ga_creds'
+        );      
+    }
+
+    /**
+     * Sanitize each setting field as needed
+     *
+     * @param array $input Contains all settings fields as array keys
+     */
+    public function sanitize( $input )
+    {
+        $new_input = array();
+        if( isset( $input['id_number'] ) )
+            $new_input['id_number'] = absint( $input['id_number'] );
+
+        if( isset( $input['ga_email'] ) )
+            $new_input['ga_email'] = sanitize_text_field( $input['ga_email'] );
+
+        return $new_input;
+    }
+
+    /** 
+     * Print the Section text
+     */
+    public function print_section_info()
+    {
+        print 'Requirements for GA Setup:';
+    }
+
+    /** 
+     * Get the settings option array and print one of its values
+     */
+    public function id_number_callback()
+    {
+        printf(
+            '<input type="text" id="id_number" name="bpp_setting_options[id_number]" value="%s" />',
+            isset( $this->options['id_number'] ) ? esc_attr( $this->options['id_number']) : ''
+        );
+    }
+
+    /** 
+     * Get the settings option array and print one of its values
+     */
+    public function ga_email_callback()
+    {
+        printf(
+            '<input type="text" id="ga_email" name="bpp_setting_options[ga_email]" value="%s" />',
+            isset( $this->options['ga_email'] ) ? esc_attr( $this->options['ga_email']) : ''
+        );
+    }
+
+    }
+}
