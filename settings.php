@@ -47,25 +47,25 @@ if(!class_exists('Blogworthy_Popular_Posts_Settings'))
     public function bpp_init()
     {        
         register_setting(
-            'bpp_ga_settings', // Option group
-            'bpp_setting_options', // Option name
-            array( $this, 'sanitize' ) // Sanitize
+            'bpp_ga_settings',
+            'bpp_setting_options',
+            array( $this, 'sanitize' )
         );
 
         add_settings_section(
-            'bpp_setting_ga_creds', // ID
+            'bpp_setting_ga_creds',
             'Google Analytics Credentials',
-            array( $this, 'print_section_info' ), // Callback
-            'blogworthy-popular-posts' // Page
-        );  
+            array( $this, 'print_section_info' ),
+            'blogworthy-popular-posts'
+        );
 
         add_settings_field(
-            'ga_id_number', // ID
-            'GA ID Number', // Title 
-            array( $this, 'id_number_callback' ), // Callback
-            'blogworthy-popular-posts', // Page
-            'bpp_setting_ga_creds' // Section           
-        );      
+            'ga_id_number',
+            'GA Profile ID',
+            array( $this, 'id_number_callback' ),
+            'blogworthy-popular-posts',
+            'bpp_setting_ga_creds'         
+        );
 
         add_settings_field(
             'ga_email', 
@@ -73,7 +73,15 @@ if(!class_exists('Blogworthy_Popular_Posts_Settings'))
             array( $this, 'ga_email_callback' ), 
             'blogworthy-popular-posts', 
             'bpp_setting_ga_creds'
-        );      
+        );
+
+        add_settings_field(
+            'ga_password', 
+            'GA Login Password', 
+            array( $this, 'ga_password_callback' ), 
+            'blogworthy-popular-posts', 
+            'bpp_setting_ga_creds'
+        );     
     }
 
     /**
@@ -90,15 +98,24 @@ if(!class_exists('Blogworthy_Popular_Posts_Settings'))
         if( isset( $input['ga_email'] ) )
             $new_input['ga_email'] = sanitize_text_field( $input['ga_email'] );
 
+        if( isset( $input['ga_password'] ) )
+            $new_input['ga_password'] = sanitize_text_field( $input['ga_password'] );
+
         return $new_input;
     }
 
     /** 
      * Print the Section text
+     * TODO: add small section for ABout here
      */
     public function print_section_info()
     {
-        print 'Requirements for GA Setup:';
+        print '<strong>Requirements for Setup:</strong><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Log into Google Analytics.<br> 
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Go your site\'s profile (go to the admin dashboard).<br> 
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Your URL should look like: https://www.google.com/analytics/web/#report/visitors-overview/a1234b23478970<b>p</b><strong><font color="#2EA2CC">987654</font></strong>/<br>
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. The last part after the <b>"p"</b> is your Google Analytics Profile ID, in this case it is <strong>"<font color="#2EA2CC">987654</font>"</strong><br><br>
+               <em><strong>NOTE:</strong> Your GA Profile ID is <strong>NOT</strong> your "UA-xxxxxx-xx" number. It is a 9 digit number unique to your site profile.</em>';
     }
 
     /** 
@@ -118,8 +135,19 @@ if(!class_exists('Blogworthy_Popular_Posts_Settings'))
     public function ga_email_callback()
     {
         printf(
-            '<input type="text" id="ga_email" name="bpp_setting_options[ga_email]" value="%s" />',
+            '<input type="email" id="ga_email" name="bpp_setting_options[ga_email]" value="%s" />',
             isset( $this->options['ga_email'] ) ? esc_attr( $this->options['ga_email']) : ''
+        );
+    }
+
+    /** 
+     * Get the settings option array and print one of its values
+     */
+    public function ga_password_callback()
+    {
+        printf(
+            '<input type="password" id="ga_password" name="bpp_setting_options[ga_password]" value="%s" />',
+            isset( $this->options['ga_password'] ) ? esc_attr( $this->options['ga_password']) : ''
         );
     }
 
