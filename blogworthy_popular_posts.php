@@ -9,7 +9,7 @@ Author URI: https://github.com/TrevorJTClarke
 License: GPL2
 */
 /*
-Copyright 2012  Francis Yaconiello  (email : francis@yaconiello.com)
+Copyright 2014  Francis Yaconiello  (email : francis@yaconiello.com)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as 
@@ -25,46 +25,55 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if(!class_exists('Blogworthy_Popular_Posts'))
-{
-	class Blogworthy_Popular_Posts
-	{
+if(!class_exists('Blogworthy_Popular_Posts')) {
+	class Blogworthy_Popular_Posts {
 		/**
 		 * Construct the plugin object
 		 */
-		public function __construct()
-		{
+		public function __construct() {
         	// Initialize Settings
-            require_once(sprintf("%s/lib/settings.php", dirname(__FILE__)));
+            require_once(sprintf("%s/settings.php", dirname(__FILE__)));
 
             // Initialize GAPI Class
             require_once(sprintf("%s/lib/gapi.class.php", dirname(__FILE__)));
             // $GAPI = new gapi();
+
+            // Initialize Widget
+            require_once(sprintf("%s/bpp_widget_class.php", dirname(__FILE__)));
             
-            if ( ! defined( 'BPP_PLUGIN_URL' ) )
-                define( 'BPP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 		} // END public function __construct
 	    
 		/**
 		 * Activate the plugin
 		 */
-		public static function activate()
-		{
-			// Do nothing
+		public static function activate() {
+			if(!get_option('BlogWorthyMostViewedPosts_maxResults'))
+                add_option('BlogWorthyMostViewedPosts_maxResults', '5');
+            if(!get_option('BlogWorthyMostViewedPosts_dateDispEnable'))
+                add_option('BlogWorthyMostViewedPosts_dateDispEnable', 'yes');
+            if(!get_option('BlogWorthyMostViewedPosts_postDateEnable'))
+                add_option('BlogWorthyMostViewedPosts_postDateEnable', 'no');
+            
+            if(!get_option('BlogWorthyMostViewedPosts_contentsViewEnable'))
+                add_option('BlogWorthyMostViewedPosts_contentsViewEnable', 'no');
+            if(!get_option('BlogWorthyMostViewedPosts_cssEnable'))
+                add_option('BlogWorthyMostViewedPosts_cssEnable', 'yes');
+            if(!get_option('BlogWorthyMostViewedPosts_cacheEnable'))
+                add_option('BlogWorthyMostViewedPosts_cacheEnable', 'no');
+            if(!get_option('BlogWorthyMostViewedPosts_cacheExpiresMinutes'))
+                add_option('BlogWorthyMostViewedPosts_cacheExpiresMinutes', '60');
 		} // END public static function activate
 	
 		/**
 		 * Deactivate the plugin
 		 */		
-		public static function deactivate()
-		{
+		public static function deactivate() {
 			// Do nothing
 		} // END public static function deactivate
 	} // END class Blogworthy_Popular_Posts
 } // END if(!class_exists('Blogworthy_Popular_Posts'))
 
-if(class_exists('Blogworthy_Popular_Posts'))
-{
+if(class_exists('Blogworthy_Popular_Posts')) {
 	// Installation and uninstallation hooks
 	register_activation_hook(__FILE__, array('Blogworthy_Popular_Posts', 'activate'));
 	register_deactivation_hook(__FILE__, array('Blogworthy_Popular_Posts', 'deactivate'));
@@ -72,28 +81,28 @@ if(class_exists('Blogworthy_Popular_Posts'))
 	// instantiate the plugin class
 	$blogworthy_popular_posts = new Blogworthy_Popular_Posts();
 	
-    // Add a link to the settings page onto the plugin page
-    if(isset($blogworthy_popular_posts))
-    {
-        // Add the settings link to the plugins page
-        if( is_admin() )
+    // check if we start BPP correctly
+    if(isset($blogworthy_popular_posts)) {
+        // Add the settings link to the admin settings
+        if( is_admin() ) {
             $Blogworthy_Popular_Posts_Settings = new Blogworthy_Popular_Posts_Settings();
-        function blogworthy_settings_link($links)
-        { 
+        }
+        
+        // Add the settings link to the plugins page
+        function blogworthy_settings_link($links) { 
             $settings_link = '<a href="options-general.php?page=blogworthy-popular-posts">Settings</a>'; 
             array_unshift($links, $settings_link); 
             return $links; 
         }
-
         $plugin = plugin_basename(__FILE__); 
         add_filter("plugin_action_links_$plugin", 'blogworthy_settings_link');
 
-        // add_menu_page('Plugin Settings', 'Settings', 'administrator', __FILE__, 'baw_settings_page', get_stylesheet_directory_uri('stylesheet_directory')."/images/media-button-other.gif");
 
-        //Add Blogworthy Popular Posts to settings panel
-        // function BlogworthyPopularPosts_menu() {
-        //     add_options_page('Blogworthy Popular Posts', 'Blogworthy Popular Posts', 8, __FILE__, 'BlogWorthyMostViewedPosts_options');
-        // }
-        // add_action('admin_menu', 'BlogworthyPopularPosts_menu');
+        //Start widget
+        // $BlogWorthyMostViewedPosts = new BlogWorthyMostViewedPosts();
+        function BPPWidgetInit() {
+            register_widget('BlogWorthyMostViewedPosts');
+        }
+        add_action('widgets_init', 'BPPWidgetInit');
     }
 }

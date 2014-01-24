@@ -38,7 +38,7 @@ if(!class_exists('Blogworthy_Popular_Posts_Settings'))
     {
         // Set class property
         $this->options = get_option( 'bpp_setting_options' );
-        require_once(sprintf("%s/templates/settings.php", dirname(__FILE__)));
+        require_once(sprintf("%s/templates/settings_page.php", dirname(__FILE__)));
     }
 
     /**
