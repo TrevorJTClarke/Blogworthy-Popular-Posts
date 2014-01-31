@@ -7,7 +7,7 @@ Author: [Trevor Clarke](https://github.com/TrevorJTClarke)
 
 Website: [Blogworthy](http://blogworthy.com)
 
-****TODO:
+####TODO:
 - finish list item templates
 - setup less css
 - setup tab js
