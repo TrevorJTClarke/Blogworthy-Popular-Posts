@@ -2,12 +2,12 @@
 for ($x=1; $x<$count; $x++) {
     $BlogWorthy_todaysingleid = $BlogWorthy_id[$x];
 
-    $titleStr = get_the_title($BlogWorthy_todaysingleid);
-    $post = get_post($BlogWorthy_todaysingleid);
-    $dateStr = mysql2date('Y-m-d', $post->post_date);
-    $contentStr = strip_tags(mb_substr($post->post_content, 0, 60));
-    $image = wp_get_attachment_image_src( get_post_thumbnail_id($BlogWorthy_todaysingleid), 'single-post-thumbnail' );
-    $category_detail=get_the_category($BlogWorthy_todaysingleid);//$post->ID
+    $titleStr =         get_the_title($BlogWorthy_todaysingleid);
+    $post =             get_post($BlogWorthy_todaysingleid);
+    $dateStr =          mysql2date('Y-m-d', $post->post_date);
+    $contentStr =       strip_tags(mb_substr($post->post_content, 0, 60));
+    $category_detail =  get_the_category($BlogWorthy_todaysingleid);//$post->ID
+    $image =            wp_get_attachment_image_src( get_post_thumbnail_id($BlogWorthy_todaysingleid), 'single-post-thumbnail' );
 
     foreach($category_detail as $cd){
         echo $cd->cat_name;
