@@ -53,9 +53,9 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
 //  WP_Widget::widget
 //**************************************************************************************
     function widget($args, $instance) {
-
         extract($args);
 
+        // Option Vars
         $title = apply_filters('widget_title', empty($instance['title']) ? '' : $instance['title']);
         $max_post = apply_filters('widget_max_post', empty($instance['max_post']) ? '' : $instance['max_post']);
         $display_excerpt = apply_filters('display_excerpt', empty($instance['display_excerpt']) ? '' : $instance['display_excerpt']);
@@ -64,11 +64,13 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
         $filterpostid = apply_filters('filterpostid', empty($instance['filterpostid']) ? '' : $instance['filterpostid']);
         $thumbnail = apply_filters('thumbnail', empty($instance['thumbnail']) ? '' : $instance['thumbnail']);
         
+        // GA Vars
         $BPP_GA = get_option('bpp_setting_options');
         $gaUsername = $BPP_GA['ga_email'];
         $gaPassword = $BPP_GA['ga_password'];
         $profileId = $BPP_GA['id_number'];
 
+        // GA Option Vars
         $dimensions = array('pagePath');
         $metrics = array('uniquePageviews');
         $sort = '-uniquePageviews';
@@ -88,8 +90,8 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
             
             $filter_postid= $filterpostid;
             $all_postid = explode(",",$filter_postid);
-            //echo $before_title . $title ."<br/>".$max_post."<br/>".$display_excerpt."<br/>".$home_page."<br/>".$after_title;
-            echo $before_title . $title . $after_title;
+            // echo $before_title . $title ."<br/>".$max_post."<br/>".$display_excerpt."<br/>".$home_page."<br/>".$after_title;
+            echo $before_title . "<h2>" . $title . "</h2>" . $after_title;
             $GAPP_filter_fixed = 'ga:pagePath=~^/';
         // require 'gapi.class.php';
         // require(sprintf("%s/lib/gapi.class.php", dirname(__FILE__)));
