@@ -1,3 +1,23 @@
 <?php
-//<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_todaypagepath[$BlogWorthy_todaysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_thumb_image"><img src='.$image[0].'  height="50px" width="54px"  /></div><div class="BlogWorthy_most_viewed_post_contents">'.$contentStr.' ...<br/><span style="color:#ccc; font-family: arial; font-size: 10px;">( Views : '.$BlogWorthy_todaypageviews[$BlogWorthy_todaysingleid].' )</span></div></div></li></ul>
+/**
+ * Template Engine
+ * Creates Html templates to be used as needed
+ */
+function CreateListItem ( $link, $title, $thumbnail, $excerpt, $views ) {
+    if(!$link){return;}
+    if(!$title){return;}
+    $image = ($display_thumbnail ? '<img src="' . $thumbnail . '" alt="' . $title . '"/>' : '' );
+    $content = ($display_excerpt ? '<h4>' . $excerpt . '</h4>' : '' );
+    $view_count = ($display_views ? '<span>' . $views . '</span>' : '' );
+
+    $template = '<li class="bpp_list_item bpp_list_today">
+                    <a href="' . $link . '">
+                        <h3>' . $title . '</h3>
+                        ' . $image . '
+                        ' . $content . '
+                        ' . $view_count . '
+                    </a>
+                </li>';
+    return $template;
+}
 ?>

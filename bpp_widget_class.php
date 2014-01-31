@@ -24,11 +24,12 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
         $instance = wp_parse_args( (array) $instance, array('title' => ''));
         $title = strip_tags($instance['title']);
         $max_post = strip_tags($instance['max_post']);
+        $display_thumbnail = strip_tags($instance['display_thumbnail']);
         $display_excerpt = strip_tags($instance['display_excerpt']);
+        $display_views = strip_tags($instance['display_views']);
         $home_page = strip_tags($instance['home_page']);
         $filtercatid = strip_tags($instance['filtercatid']);
         $filterpostid = strip_tags($instance['filterpostid']);
-        $thumbnail = strip_tags($instance['thumbnail']);
 
         require(sprintf("%s/templates/bpp_widget_admin_form.php", dirname(__FILE__)));
     }
@@ -40,11 +41,12 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
         $instance = $old_instance;
         $instance['title'] = strip_tags($new_instance['title']);
         $instance['max_post'] = strip_tags($new_instance['max_post']);
+        $instance['display_thumbnail'] = strip_tags($new_instance['display_thumbnail']);
         $instance['display_excerpt'] = strip_tags($new_instance['display_excerpt']);
+        $instance['display_views'] = strip_tags($new_instance['display_views']);
         $instance['home_page'] = strip_tags($new_instance['home_page']);
         $instance['filtercatid'] = strip_tags($new_instance['filtercatid']);
         $instance['filterpostid'] = strip_tags($new_instance['filterpostid']);
-        $instance['thumbnail'] = strip_tags($new_instance['thumbnail']);
         
         return $instance;
     }
@@ -58,11 +60,12 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
         // Option Vars
         $title = apply_filters('widget_title', empty($instance['title']) ? '' : $instance['title']);
         $max_post = apply_filters('widget_max_post', empty($instance['max_post']) ? '' : $instance['max_post']);
+        $display_thumbnail = apply_filters('display_thumbnail', empty($instance['display_thumbnail']) ? '' : $instance['display_thumbnail']);
         $display_excerpt = apply_filters('display_excerpt', empty($instance['display_excerpt']) ? '' : $instance['display_excerpt']);
+        $display_views = apply_filters('display_views', empty($instance['display_views']) ? '' : $instance['display_views']);
         $home_page = apply_filters('home_page', empty($instance['home_page']) ? '' : $instance['home_page']);
         $filtercatid = apply_filters('filtercatid', empty($instance['filtercatid']) ? '' : $instance['filtercatid']);
         $filterpostid = apply_filters('filterpostid', empty($instance['filterpostid']) ? '' : $instance['filterpostid']);
-        $thumbnail = apply_filters('thumbnail', empty($instance['thumbnail']) ? '' : $instance['thumbnail']);
         
         // GA Vars
         $BPP_GA = get_option('bpp_setting_options');
@@ -80,6 +83,20 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
 
         $ga = new gapi($gaUsername, $gaPassword);
         $mostPopular = $ga->requestReportData($profileId, $dimensions, $metrics, $sort, $filter, $fromDate, $toDate, 1, 10);
+
+        $ga = new gapi($gauser,$gapwd);
+        $ga->requestReportData($gaid, array('hostname', 'pagePath'), array('pageviews','visits'), array('-pageviews','-visits'), $filter=$GAPP_filter_fixed.$GAPP_filter, $start_date=$BlogWorthyFrom, $end_date=$BlogWorthycurrent_date, $start_index=1, $max_results=$max_post);
+        // print_r($ga);
+        // echo "<br/><br/>";
+
+        $gaweek = new gapi($gauser,$gapwd);
+        $gaweek->requestReportData($gaid, array('hostname', 'pagePath'), array('pageviews','visits'), array('-pageviews','-visits'), $filter=$GAPP_filter_fixed.$GAPP_filter, $start_date=$BlogWorthyweek_From, $end_date=$BlogWorthycurrent_date, $start_index=1, $max_results=$max_post);
+        // print_r($ga);
+        // echo "<br/><br/>";
+
+        $gaall = new gapi($gauser,$gapwd);
+        $gaall->requestReportData($gaid, array('hostname', 'pagePath'), array('pageviews','visits'), array('-pageviews','-visits'), $filter=$GAPP_filter_fixed.$GAPP_filter, $start_date=$BlogWorthyall_From, $end_date=$BlogWorthycurrent_date, $start_index=1, $max_results=$max_post);
+        
 
         var_dump($mostPopular);
 
@@ -120,6 +137,8 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
         //     $BlogWorthyalldates = date ( 'Y-m-d' , $BlogWorthyalldates );
         //     $BlogWorthyall_From = $BlogWorthyalldates;  
 
+        // TODO:
+        // require widget_engine.php
         
         // BlogWorthyMostViewedPosts_view();
         

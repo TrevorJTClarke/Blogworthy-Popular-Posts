@@ -106,7 +106,7 @@ for ($x=1; $x<$count; $x++) {
             }
         }
     } else {
-    echo $today_post_output= 'Something wrong!! Please try again...';
+        echo $today_post_output= 'Something wrong!! Please try again...';
     }
 }
 

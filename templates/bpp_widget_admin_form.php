@@ -8,31 +8,26 @@
     <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
 </p>
 <p>
-    <input class="widefat" id="<?php echo $this->get_field_id('gauser'); ?>" name="<?php echo $this->get_field_name('gauser'); ?>" type="hidden" value="<?php echo get_option('BlogWorthyMostViewedPosts_username'); ?>" />
-</p>
-<p>
-    <input class="widefat" id="<?php echo $this->get_field_id('gapwd'); ?>" name="<?php echo $this->get_field_name('gapwd'); ?>" type="hidden" value="<?php echo get_option('BlogWorthyMostViewedPosts_password'); ?>" />
-</p>
-<p>
-    <input class="widefat" id="<?php echo $this->get_field_id('gaid'); ?>" name="<?php echo $this->get_field_name('gaid'); ?>" type="hidden" value="<?php echo get_option('BlogWorthyMostViewedPosts_profileID'); ?>" />
-</p>
-<p>
     <label for="<?php echo $this->get_field_id('max_post'); ?>"><?php _e('<b>Max Results:</b>', 'blogworthy-popular-posts'); ?></label>
     <input class="widefat" id="<?php echo $this->get_field_id('max_post'); ?>" name="<?php echo $this->get_field_name('max_post'); ?>" type="text" value="<?php echo esc_attr($max_post); ?>" />
     <br/>
     <span><strong>Example: 5, 10, 15, 20, etc.</strong></span>
 </p>
 <p>
+    <label for="<?php echo $this->get_field_id('display_thumbnail'); ?>"><?php _e('<b>Show Thumbnail?:</b>', 'blogworthy-popular-posts'); ?></label>
+    <input  id="<?php echo $this->get_field_id('display_thumbnail'); ?>" name="<?php echo $this->get_field_name('display_thumbnail'); ?>" type="radio" value="yes" checked="checked"/>Yes<input id="<?php echo $this->get_field_id('display_thumbnail'); ?>" name="<?php echo $this->get_field_name('display_thumbnail'); ?>" type="radio" value="no" />No
+</p>
+<p>
     <label for="<?php echo $this->get_field_id('display_excerpt'); ?>"><?php _e('<b>Show excerpt?:</b>', 'blogworthy-popular-posts'); ?></label>
     <input  id="<?php echo $this->get_field_id('display_excerpt'); ?>" name="<?php echo $this->get_field_name('display_excerpt'); ?>" type="radio" value="yes" checked="checked"/>Yes<input id="<?php echo $this->get_field_id('display_excerpt'); ?>" name="<?php echo $this->get_field_name('display_excerpt'); ?>" type="radio" value="no" />No
 </p>
 <p>
-    <label for="<?php echo $this->get_field_id('thumbnail'); ?>"><?php _e('<b>Show Thumbnail:</b>', 'blogworthy-popular-posts'); ?></label>
-    <input  id="<?php echo $this->get_field_id('thumbnail'); ?>" name="<?php echo $this->get_field_name('thumbnail'); ?>" type="checkbox" value="yes" <?php if($thumbnail == 'yes'){ echo 'checked="checked"'; } else{}; ?>  />
+    <label for="<?php echo $this->get_field_id('display_views'); ?>"><?php _e('<b>Show Views?:</b>', 'blogworthy-popular-posts'); ?></label>
+    <input  id="<?php echo $this->get_field_id('display_views'); ?>" name="<?php echo $this->get_field_name('display_views'); ?>" type="radio" value="yes" checked="checked"/>Yes<input id="<?php echo $this->get_field_id('display_views'); ?>" name="<?php echo $this->get_field_name('display_views'); ?>" type="radio" value="no" />No
 </p>
 <p>
-    <label for="<?php echo $this->get_field_id('home_page'); ?>"><?php _e('<b>Remove home page from list:</b>', 'blogworthy-popular-posts'); ?></label>
-    <input  id="<?php echo $this->get_field_id('home_page'); ?>" name="<?php echo $this->get_field_name('home_page'); ?>" type="checkbox" value="yes" checked="checked" />
+    <label for="<?php echo $this->get_field_id('home_page'); ?>"><?php _e('<b>Remove home page from list?:</b>', 'blogworthy-popular-posts'); ?></label>
+    <input  id="<?php echo $this->get_field_id('home_page'); ?>" name="<?php echo $this->get_field_name('home_page'); ?>" type="radio" value="yes" checked="checked"/>Yes<input id="<?php echo $this->get_field_id('home_page'); ?>" name="<?php echo $this->get_field_name('home_page'); ?>" type="radio" value="no" />No
 </p>
 <p>
     <label for="<?php echo $this->get_field_id('filtercatid'); ?>"><?php _e('<b>Filter Out Category:</b>', 'blogworthy-popular-posts'); ?></label>
