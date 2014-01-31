@@ -1,6 +1,32 @@
 <?php
 /**
  * WP_Widget::BlogWorthyMostViewedPosts
+ * 
+ * -------------- OLD -------------------
+ * Constructor
+ *     - extend base widget, setup defaults
+ * WP_Widget::form
+ *     - widget options in a form inside widgets menu
+ * WP_Widget::update
+ *     - save settings to the widget
+ * WP_Widget::widget
+ *     - builds the renderable piece of html, also holds GA logic
+ * Register widget
+ *     - adds to WP widget registry
+ * Activate and Deactivate
+ *     - loads plugin
+ * Options
+ *     - stores settings
+ * Add admin menu
+ *     - adds ot admin panel
+ * Output with debug mode
+ *     - this doesnt work
+ * Widget output
+ *     - grabs the stored widget data
+ * Load  or unload custom style sheet and javascript
+ *     - fix to pull from the correct area
+ * Implementation of the short code
+ *     - not sure if this works...
 */
 
 // BlogWorthyMostViewedPosts Class
@@ -10,7 +36,6 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
 // Constructor
 //**************************************************************************************
     function BlogWorthyMostViewedPosts() {
-        // $GAPP_url = bloginfo('url');
         $lang = dirname( plugin_basename(__FILE__)) . "/languages";
         load_plugin_textdomain('blogworthy-popular-posts', false, $lang);
         $widget_ops = array('description' => __('Display your popular posts.', 'blogworthy-popular-posts'));
@@ -83,24 +108,21 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
 
         $ga = new gapi($gaUsername, $gaPassword);
         $mostPopular = $ga->requestReportData($profileId, $dimensions, $metrics, $sort, $filter, $fromDate, $toDate, 1, 10);
-
-        $ga = new gapi($gauser,$gapwd);
-        $ga->requestReportData($gaid, array('hostname', 'pagePath'), array('pageviews','visits'), array('-pageviews','-visits'), $filter=$GAPP_filter_fixed.$GAPP_filter, $start_date=$BlogWorthyFrom, $end_date=$BlogWorthycurrent_date, $start_index=1, $max_results=$max_post);
-        // print_r($ga);
-        // echo "<br/><br/>";
-
-        $gaweek = new gapi($gauser,$gapwd);
-        $gaweek->requestReportData($gaid, array('hostname', 'pagePath'), array('pageviews','visits'), array('-pageviews','-visits'), $filter=$GAPP_filter_fixed.$GAPP_filter, $start_date=$BlogWorthyweek_From, $end_date=$BlogWorthycurrent_date, $start_index=1, $max_results=$max_post);
-        // print_r($ga);
-        // echo "<br/><br/>";
-
-        $gaall = new gapi($gauser,$gapwd);
-        $gaall->requestReportData($gaid, array('hostname', 'pagePath'), array('pageviews','visits'), array('-pageviews','-visits'), $filter=$GAPP_filter_fixed.$GAPP_filter, $start_date=$BlogWorthyall_From, $end_date=$BlogWorthycurrent_date, $start_index=1, $max_results=$max_post);
+        var_dump($mostPopular);
+        // TODO:
+        // $ga = new gapi($gauser,$gapwd);
+        // $ga->requestReportData($gaid, array('hostname', 'pagePath'), array('pageviews','visits'), array('-pageviews','-visits'), $filter=$GAPP_filter_fixed.$GAPP_filter, $start_date=$BlogWorthyFrom, $end_date=$BlogWorthycurrent_date, $start_index=1, $max_results=$max_post);
+        // // print_r($ga);
+        // // echo "<br/><br/>";
+        // $gaweek = new gapi($gauser,$gapwd);
+        // $gaweek->requestReportData($gaid, array('hostname', 'pagePath'), array('pageviews','visits'), array('-pageviews','-visits'), $filter=$GAPP_filter_fixed.$GAPP_filter, $start_date=$BlogWorthyweek_From, $end_date=$BlogWorthycurrent_date, $start_index=1, $max_results=$max_post);
+        // // print_r($ga);
+        // // echo "<br/><br/>";
+        // $gaall = new gapi($gauser,$gapwd);
+        // $gaall->requestReportData($gaid, array('hostname', 'pagePath'), array('pageviews','visits'), array('-pageviews','-visits'), $filter=$GAPP_filter_fixed.$GAPP_filter, $start_date=$BlogWorthyall_From, $end_date=$BlogWorthycurrent_date, $start_index=1, $max_results=$max_post);
         
 
-        var_dump($mostPopular);
 
-        echo $before_widget;
         
             $filter_catid= $filtercatid;
             $all_catid = explode(",",$filter_catid);
@@ -139,7 +161,16 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
 
         // TODO:
         // require widget_engine.php
+        // construct widget
         
+
+        echo $before_widget;
+
+        // TODO:
+        // echo $contructed_widget;
+
+        // TODO:
+        // ???? what does this do?
         // BlogWorthyMostViewedPosts_view();
         
         echo $after_widget;

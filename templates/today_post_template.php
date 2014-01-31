@@ -1,4 +1,6 @@
 <?php
+// TODO:
+// create a funtion that returns the created list item content
 for ($x=1; $x<$count; $x++) {
     $BlogWorthy_todaysingleid = $BlogWorthy_id[$x];
 
@@ -9,6 +11,20 @@ for ($x=1; $x<$count; $x++) {
     $category_detail =  get_the_category($BlogWorthy_todaysingleid);//$post->ID
     $image =            wp_get_attachment_image_src( get_post_thumbnail_id($BlogWorthy_todaysingleid), 'single-post-thumbnail' );
 
+
+// LOGIC:
+// if exclude homepage, skip
+// if in filtered cat id, skip
+// if in filtered post id, skip
+
+
+
+
+
+
+
+// DEPRECATE PLEASE!!!!!!!!!!!!!!!!!!!!!
+// -----------------------------
     foreach($category_detail as $cd){
         echo $cd->cat_name;
         echo $cd->cat_ID;

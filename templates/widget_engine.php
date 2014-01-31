@@ -11,16 +11,16 @@
 
 function CreateWrapper ( $widget_title, $today_content, $week_content, $month_content ) {
     if(!$widget_title){return;}
-    $template = '<div class="BPP_tabs" id="BPP_Popular_Posts">
+    $template = '<div class="bpp_tabs" id="BPP_Popular_Posts">
                     <div class="bpp_widget_title">' . $widget_title . '</div>
                     <ul class="bpp_tab_container">
                         <li id="bpp_tab1" class="bpp_tab_item">Today</li>
                         <li id="bpp_tab2" class="bpp_tab_item">Week</li>
                         <li id="bpp_tab3" class="bpp_tab_item">All Time</li>
                     </ul>
-                    <ul id="bpp_content1" class="TabbedPanelsContent">' . $today_content . '</ul>
-                    <ul id="bpp_content2" class="TabbedPanelsContent">' . $week_content . '</ul>
-                    <ul id="bpp_content3" class="TabbedPanelsContent">' . $month_content . '</ul>
+                    <ul id="bpp_content1" class="bpp_tab_content">' . $today_content . '</ul>
+                    <ul id="bpp_content2" class="bpp_tab_content">' . $week_content . '</ul>
+                    <ul id="bpp_content3" class="bpp_tab_content">' . $month_content . '</ul>
                 </div>';
     return $template;
 }

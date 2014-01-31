@@ -1,4 +1,6 @@
 <?php
+// TODO:
+// create a funtion that returns the created list item content
 for ($y=1; $y<$countweekid; $y++) {
     $BlogWorthy_weeklysingleid = $BlogWorthy_weekids[$y];
 
