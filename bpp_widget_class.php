@@ -153,7 +153,6 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
         // print_r($gaall);
         // echo "<br/><br/>";        
 
-        // TODO:
         // construct widget
         require(sprintf("%s/templates/widget_engine.php", dirname(__FILE__)));
 

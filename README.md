@@ -8,7 +8,8 @@ Author: [Trevor Clarke](https://github.com/TrevorJTClarke)
 Website: [Blogworthy](http://blogworthy.com)
 
 ####TODO:
-- finish list item templates
+- finish looping through data and parsing
+- set defaults on each ul
 - setup less css
 - setup tab js
 - get real data
