@@ -1,6 +1,7 @@
 <?php
 // TODO:
 // create a funtion that returns the created list item content
+$weekArray = array();
 for ($y=1; $y<$countweekid; $y++) {
     $BlogWorthy_weeklysingleid = $BlogWorthy_weekids[$y];
 
@@ -16,8 +17,21 @@ for ($y=1; $y<$countweekid; $y++) {
 // if exclude homepage, skip
 // if in filtered cat id, skip
 // if in filtered post id, skip
-
-
+    if($home_page != "yes"){
+        if($BlogWorthy_weeklysingleid == 0) {
+        } else {
+            if (in_array($cd->cat_ID, $all_catid)){
+            } else {
+                if (in_array($BlogWorthy_weeklysingleid, $all_postid)) {
+                } else {
+                    $tempWeekItem = CreateListItem( $BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid], $titleStr, $image[0], $contentStr, $BlogWorthy_weeklypageviews[$BlogWorthy_weeklysingleid] );
+                    array_push($weekArray, $tempWeekItem);
+                    // echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_thumb_image"><img src='.$image[0].'  height="50px" width="54px" /></div><div class="BlogWorthy_most_viewed_post_contents">'.$contentStr.' ...<br/><span style="color:#ccc; font-family: arial; font-size: 10px;">( Views : '.$BlogWorthy_weeklypageviews[$BlogWorthy_weeklysingleid].' )</span></div></div></li></ul>';
+                }
+            }
+        }
+    }
+}
 
 
 
@@ -26,103 +40,103 @@ for ($y=1; $y<$countweekid; $y++) {
 // DEPRECATE PLEASE!!!!!!!!!!!!!!!!!!!!!
 // -----------------------------
 
-    foreach($category_detail as $cd){
-        echo $cd->cat_ID;
-    }
+//     foreach($category_detail as $cd){
+//         echo $cd->cat_ID;
+//     }
 
-    if($display_excerpt == "yes" && $home_page == "yes" && $thumbnail == "yes"){
-        if($BlogWorthy_weeklysingleid == 0){
-        } else {
-            if (in_array($cd->cat_ID, $all_catid)){
-            } else {   
-                if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
-                } else {
-                    echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_thumb_image"><img src='.$image[0].'  height="50px" width="54px" /></div><div class="BlogWorthy_most_viewed_post_contents">'.$contentStr.' ...<br/><span style="color:#ccc; font-family: arial; font-size: 10px;">( Views : '.$BlogWorthy_weeklypageviews[$BlogWorthy_weeklysingleid].' )</span></div></div></li></ul>';
-                }
-            }
-        }
-    }
+//     if($display_excerpt == "yes" && $home_page == "yes" && $thumbnail == "yes"){
+//         if($BlogWorthy_weeklysingleid == 0){
+//         } else {
+//             if (in_array($cd->cat_ID, $all_catid)){
+//             } else {   
+//                 if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
+//                 } else {
+//                     echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_thumb_image"><img src='.$image[0].'  height="50px" width="54px" /></div><div class="BlogWorthy_most_viewed_post_contents">'.$contentStr.' ...<br/><span style="color:#ccc; font-family: arial; font-size: 10px;">( Views : '.$BlogWorthy_weeklypageviews[$BlogWorthy_weeklysingleid].' )</span></div></div></li></ul>';
+//                 }
+//             }
+//         }
+//     }
 
-    elseif($display_excerpt == "yes" && $home_page == "yes" && $thumbnail ==""){
-        if($BlogWorthy_weeklysingleid == 0) {
-        } else {
-            if (in_array($cd->cat_ID, $all_catid)){
-            } else {   
-                if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
-                } else {
-                    echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_most_viewed_post_contents">'.$contentStr.' ...<br/><span style="color:#ccc; font-family: arial; font-size: 10px;">( Views : '.$BlogWorthy_weeklypageviews[$BlogWorthy_weeklysingleid].' )</span></div></div></li></ul>';
-                }
-            }
-        }
-    }
+//     elseif($display_excerpt == "yes" && $home_page == "yes" && $thumbnail ==""){
+//         if($BlogWorthy_weeklysingleid == 0) {
+//         } else {
+//             if (in_array($cd->cat_ID, $all_catid)){
+//             } else {   
+//                 if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
+//                 } else {
+//                     echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_most_viewed_post_contents">'.$contentStr.' ...<br/><span style="color:#ccc; font-family: arial; font-size: 10px;">( Views : '.$BlogWorthy_weeklypageviews[$BlogWorthy_weeklysingleid].' )</span></div></div></li></ul>';
+//                 }
+//             }
+//         }
+//     }
 
-    elseif($display_excerpt == "yes" && $home_page == "" && $thumbnail ==""){
-        if (in_array($cd->cat_ID, $all_catid)){
-        } else {   
-            if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
-            } else {
-                echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_most_viewed_post_contents">'.$contentStr.' ...<br/><span style="color:#ccc; font-family: arial; font-size: 10px;">( Views : '.$BlogWorthy_weeklypageviews[$BlogWorthy_weeklysingleid].' )</span></div></div></li></ul>';  
-            }
-        }
-    }
+//     elseif($display_excerpt == "yes" && $home_page == "" && $thumbnail ==""){
+//         if (in_array($cd->cat_ID, $all_catid)){
+//         } else {   
+//             if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
+//             } else {
+//                 echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_most_viewed_post_contents">'.$contentStr.' ...<br/><span style="color:#ccc; font-family: arial; font-size: 10px;">( Views : '.$BlogWorthy_weeklypageviews[$BlogWorthy_weeklysingleid].' )</span></div></div></li></ul>';  
+//             }
+//         }
+//     }
 
-    elseif($display_excerpt == "yes" && $home_page == "" && $thumbnail =="yes"){
-        if (in_array($cd->cat_ID, $all_catid)){
-        } else {
-            if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
-            } else {
-                echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_thumb_image"><img src='.$image[0].'  height="50px" width="54px" /></div><div class="BlogWorthy_most_viewed_post_contents">'.$contentStr.' ...<br/><span style="color:#ccc; font-family: arial; font-size: 10px;">( Views : '.$BlogWorthy_weeklypageviews[$BlogWorthy_weeklysingleid].' )</span></div></div></li></ul>';  
-            }
-        }
-    }
+//     elseif($display_excerpt == "yes" && $home_page == "" && $thumbnail =="yes"){
+//         if (in_array($cd->cat_ID, $all_catid)){
+//         } else {
+//             if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
+//             } else {
+//                 echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_thumb_image"><img src='.$image[0].'  height="50px" width="54px" /></div><div class="BlogWorthy_most_viewed_post_contents">'.$contentStr.' ...<br/><span style="color:#ccc; font-family: arial; font-size: 10px;">( Views : '.$BlogWorthy_weeklypageviews[$BlogWorthy_weeklysingleid].' )</span></div></div></li></ul>';  
+//             }
+//         }
+//     }
 
-    elseif($display_excerpt == "no" && $home_page == "" && $thumbnail ==""){
-        if (in_array($cd->cat_ID, $all_catid)){
-        } else {   
-            if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
-            } else {
-                echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a></div></li></ul>';    
-            }
-        }
-    }
+//     elseif($display_excerpt == "no" && $home_page == "" && $thumbnail ==""){
+//         if (in_array($cd->cat_ID, $all_catid)){
+//         } else {   
+//             if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
+//             } else {
+//                 echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a></div></li></ul>';    
+//             }
+//         }
+//     }
 
-    elseif($display_excerpt == "no" && $home_page == "" && $thumbnail =="yes"){
-        if (in_array($cd->cat_ID, $all_catid)){
-        } else {   
-            if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
-            } else {
-                echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_thumb_image"><img src='.$image[0].'  height="50px" width="54px" /></div></div></li></ul>';   
-            }
-        }
-    }
+//     elseif($display_excerpt == "no" && $home_page == "" && $thumbnail =="yes"){
+//         if (in_array($cd->cat_ID, $all_catid)){
+//         } else {   
+//             if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
+//             } else {
+//                 echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_thumb_image"><img src='.$image[0].'  height="50px" width="54px" /></div></div></li></ul>';   
+//             }
+//         }
+//     }
 
-    elseif($display_excerpt == "no" && $home_page == "yes" && $thumbnail =="yes"){
-        if($BlogWorthy_weeklysingleid == 0){
-        } else {
-            if (in_array($cd->cat_ID, $all_catid)){
-            } else {
-                if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
-                } else {
-                    echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_thumb_image"><img src='.$image[0].'  height="50px" width="54px" /></div></div></li></ul>';
-                }
-            }
-        }
-    }
+//     elseif($display_excerpt == "no" && $home_page == "yes" && $thumbnail =="yes"){
+//         if($BlogWorthy_weeklysingleid == 0){
+//         } else {
+//             if (in_array($cd->cat_ID, $all_catid)){
+//             } else {
+//                 if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
+//                 } else {
+//                     echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a><br /><div class="BlogWorthy_thumb_image"><img src='.$image[0].'  height="50px" width="54px" /></div></div></li></ul>';
+//                 }
+//             }
+//         }
+//     }
 
-    elseif($display_excerpt == "no" && $home_page == "yes" && $thumbnail ==""){
-        if($BlogWorthy_weeklysingleid == 0){
-        } else {
-            if (in_array($cd->cat_ID, $all_catid)){
-            } else {
-                if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
-                } else {
-                    echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a></div></li></ul>';
-                }
-            }
-        }
-    } else {
-        echo $week_post_output= 'Something wrong!! Please try again...';
-    }
+//     elseif($display_excerpt == "no" && $home_page == "yes" && $thumbnail ==""){
+//         if($BlogWorthy_weeklysingleid == 0){
+//         } else {
+//             if (in_array($cd->cat_ID, $all_catid)){
+//             } else {
+//                 if (in_array($BlogWorthy_weeklysingleid, $all_postid)){
+//                 } else {
+//                     echo $week_post_output= '<ul><li><div class="BlogWorthy_most_viewed_post"><a href='.$BlogWorthy_weeklypagepath[$BlogWorthy_weeklysingleid].'>'.$titleStr.'</a></div></li></ul>';
+//                 }
+//             }
+//         }
+//     } else {
+//         echo $week_post_output= 'Something wrong!! Please try again...';
+//     }
 
-}
+// }
 ?>

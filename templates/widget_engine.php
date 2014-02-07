@@ -3,12 +3,10 @@
  * Widget Engine
  * Creates Combined Html based on all the data from GA
  */
-// TODO:
-// require template_engine.php
-// require today_post_template.php
-// require week_post_template.php
-// require month_post_template.php
+//pull in required files
+require(sprintf("%s/template_engine.php", dirname(__FILE__)));
 
+// wraps all content after its been formatted
 function CreateWrapper ( $widget_title, $today_content, $week_content, $month_content ) {
     if(!$widget_title){return;}
     $template = '<div class="bpp_tabs" id="BPP_Popular_Posts">
@@ -25,14 +23,11 @@ function CreateWrapper ( $widget_title, $today_content, $week_content, $month_co
     return $template;
 }
 
-// TODO:
-// - loop through all 3
-// - assemble into html block
-// - return
-function CreateWidget () {
+// formats all data into compilable data
+function CreateWidget ( $title, $gaTodayData, $gaWeekData, $gaMonthData ) {
     
     //format today data
-    foreach($ga->getResults() as $result) {
+    foreach ($gaTodayData as $result) {
         $getPageviews  = $result->getPageviews();
         $getHostname = $result->getHostname();
         $getPagepath = $result->getPagepath();
@@ -47,8 +42,11 @@ function CreateWidget () {
     $count = count($BlogWorthy_id);
     $BlogWorthy_todaypagepath = $todaypagepath;
 
+    require(sprintf("%s/today_post_template.php", dirname(__FILE__)));
+    $todayHtmlArray = implode("", $todayArray);
+
     //format week data
-    foreach($gaweek->getResults() as $weekresult) {
+    foreach ($gaWeekData as $weekresult) {
         $getPageviews = $weekresult->getPageviews();
         $getHostname = $weekresult->getHostname();
         $getPagepath = $weekresult->getPagepath();
@@ -63,8 +61,11 @@ function CreateWidget () {
     $countweekid = count($BlogWorthy_weekids);
     $BlogWorthy_weeklypagepath = $weeklypagepath;
 
+    require(sprintf("%s/week_post_template.php", dirname(__FILE__)));
+    $weekHtmlArray = implode("", $weekArray);
+
     // format all data
-    foreach($gaall->getResults() as $allresult) {
+    foreach ($gaMonthData as $allresult) {
         $getPageviews  = $allresult->getPageviews();
         $getHostname = $allresult->getHostname();
         $getPagepath = $allresult->getPagepath();
@@ -80,12 +81,11 @@ function CreateWidget () {
     $countallid = count($BlogWorthy_allids);
     $BlogWorthy_allpagepath = $allpagepath;
 
-    // TODO:
-    // fire off logic for all data
-
-    // TODO:
+    require(sprintf("%s/month_post_template.php", dirname(__FILE__)));
+    $monthHtmlArray = implode("", $monthArray);
+    
     // Construct Widget Html with data
-    // CreateWrapper( $widget_title, $today_content, $week_content, $month_content );
-
+    return CreateWrapper( $title, $todayHtmlArray, $weekHtmlArray, $monthHtmlArray );
 }
+
 ?>

@@ -91,12 +91,15 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
         $home_page = apply_filters('home_page', empty($instance['home_page']) ? '' : $instance['home_page']);
         $filtercatid = apply_filters('filtercatid', empty($instance['filtercatid']) ? '' : $instance['filtercatid']);
         $filterpostid = apply_filters('filterpostid', empty($instance['filterpostid']) ? '' : $instance['filterpostid']);
+        $all_catid = explode(",",$filtercatid);
+        $all_postid = explode(",",$filterpostid);
         
         // GA Vars
         $BPP_GA = get_option('bpp_setting_options');
         $gaUsername = $BPP_GA['ga_email'];
         $gaPassword = $BPP_GA['ga_password'];
         $profileId = $BPP_GA['id_number'];
+        $GAPP_filter_fixed = 'ga:pagePath=~^/';
 
         // GA Option Vars
         $dimensions = array('pagePath');
@@ -106,68 +109,60 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
         $fromDate = date('Y-m-d', strtotime('-2 days'));
         $toDate = date('Y-m-d');
 
+        // TODO:
+        // remove this
+        // $ga = new gapi($gaUsername, $gaPassword);
+        // $mostPopular = $ga->requestReportData($profileId, $dimensions, $metrics, $sort, $filter, $fromDate, $toDate, 1, 10);
+        // var_dump($mostPopular);
+
+        // Date Range VARS
+        $BlogWorthy_today = 1;
+        $BlogWorthy_week = 7;
+        $BlogWorthy_month = 30;
+        $BlogWorthytodays_year = date("Y");
+        $BlogWorthytodays_month = date("m");
+        $BlogWorthytodays_day = date("d");
+        $BlogWorthycurrent_date = "$BlogWorthytodays_year-$BlogWorthytodays_month-$BlogWorthytodays_day";
+        
+        //Get today date
+        $BlogWorthydaydate = strtotime ( "-$BlogWorthy_today day" , strtotime ( $BlogWorthycurrent_date ) ) ;
+        $BlogWorthydaydate = date( 'Y-m-d' , $BlogWorthydaydate );
+        $BlogWorthyFrom = $BlogWorthydaydate;
+
+        //Get weekly date
+        $BlogWorthyweekdates = strtotime ( "-$BlogWorthy_week day" , strtotime ( $BlogWorthycurrent_date ) ) ;
+        $BlogWorthyweekdates = date( 'Y-m-d' , $BlogWorthyweekdates );
+        $BlogWorthyweek_From = $BlogWorthyweekdates;
+
+        //Get Monthly date
+        $BlogWorthyalldates = strtotime ( "-$BlogWorthy_month day" , strtotime ( $BlogWorthycurrent_date ) ) ;
+        $BlogWorthyalldates = date( 'Y-m-d' , $BlogWorthyalldates );
+        $BlogWorthyall_From = $BlogWorthyalldates;  
+        
+        // request 3 sets of data from GA
         $ga = new gapi($gaUsername, $gaPassword);
-        $mostPopular = $ga->requestReportData($profileId, $dimensions, $metrics, $sort, $filter, $fromDate, $toDate, 1, 10);
-        var_dump($mostPopular);
-        // TODO:
-        // $ga = new gapi($gauser,$gapwd);
-        // $ga->requestReportData($gaid, array('hostname', 'pagePath'), array('pageviews','visits'), array('-pageviews','-visits'), $filter=$GAPP_filter_fixed.$GAPP_filter, $start_date=$BlogWorthyFrom, $end_date=$BlogWorthycurrent_date, $start_index=1, $max_results=$max_post);
-        // // print_r($ga);
-        // // echo "<br/><br/>";
-        // $gaweek = new gapi($gauser,$gapwd);
-        // $gaweek->requestReportData($gaid, array('hostname', 'pagePath'), array('pageviews','visits'), array('-pageviews','-visits'), $filter=$GAPP_filter_fixed.$GAPP_filter, $start_date=$BlogWorthyweek_From, $end_date=$BlogWorthycurrent_date, $start_index=1, $max_results=$max_post);
-        // // print_r($ga);
-        // // echo "<br/><br/>";
-        // $gaall = new gapi($gauser,$gapwd);
-        // $gaall->requestReportData($gaid, array('hostname', 'pagePath'), array('pageviews','visits'), array('-pageviews','-visits'), $filter=$GAPP_filter_fixed.$GAPP_filter, $start_date=$BlogWorthyall_From, $end_date=$BlogWorthycurrent_date, $start_index=1, $max_results=$max_post);
-        
-
-
-        
-            $filter_catid= $filtercatid;
-            $all_catid = explode(",",$filter_catid);
-            
-            $filter_postid= $filterpostid;
-            $all_postid = explode(",",$filter_postid);
-            // echo $before_title . $title ."<br/>".$max_post."<br/>".$display_excerpt."<br/>".$home_page."<br/>".$after_title;
-            echo $before_title . "<h2>" . $title . "</h2>" . $after_title;
-            $GAPP_filter_fixed = 'ga:pagePath=~^/';
-        // require 'gapi.class.php';
-        // require(sprintf("%s/lib/gapi.class.php", dirname(__FILE__)));
-
-        // $BlogWorthy_today = 1;
-        // $BlogWorthy_week = 7;
-        // $BlogWorthy_month = 30;
-                
-        // $BlogWorthytodays_year = date("Y");
-        //     $BlogWorthytodays_month = date("m");
-        //     $BlogWorthytodays_day = date("d");
-        //     $BlogWorthycurrent_date = "$BlogWorthytodays_year-$BlogWorthytodays_month-$BlogWorthytodays_day";
-        //     $BlogWorthydaydate = strtotime ( "-$BlogWorthy_today day" , strtotime ( $BlogWorthycurrent_date ) ) ;
-        //     $BlogWorthydaydate = date ( 'Y-m-d' , $BlogWorthydaydate );
-        //     $BlogWorthyFrom = $BlogWorthydaydate;
-                
-            
-        //     //Get weekly date
-        //     $BlogWorthyweekdates = strtotime ( "-$BlogWorthy_week day" , strtotime ( $BlogWorthycurrent_date ) ) ;
-        //     $BlogWorthyweekdates = date ( 'Y-m-d' , $BlogWorthyweekdates );
-        //     $BlogWorthyweek_From = $BlogWorthyweekdates;
-                
-            
-        //     //Get Monthly date
-        //     $BlogWorthyalldates = strtotime ( "-$BlogWorthy_month day" , strtotime ( $BlogWorthycurrent_date ) ) ;
-        //     $BlogWorthyalldates = date ( 'Y-m-d' , $BlogWorthyalldates );
-        //     $BlogWorthyall_From = $BlogWorthyalldates;  
+        $gaTodayData = $ga->requestReportData($profileId, $dimensions, $metrics, $sort, $filter, $BlogWorthyFrom, $BlogWorthycurrent_date, 1, $max_post);
+        // print_r($ga);
+        // echo "<br/><br/>";
+        $gaweek = new gapi($gaUsername, $gaPassword);
+        $gaWeekData = $gaweek->requestReportData($profileId, $dimensions, $metrics, $sort, $filter, $BlogWorthyweek_From, $BlogWorthycurrent_date, 1, $max_post);
+        // print_r($gaweek);
+        // echo "<br/><br/>";
+        $gaall = new gapi($gaUsername, $gaPassword);
+        $gaMonthData = $gaall->requestReportData($profileId, $dimensions, $metrics, $sort, $filter, $BlogWorthyall_From, $BlogWorthycurrent_date, 1, $max_post);
+        // print_r($gaall);
+        // echo "<br/><br/>";        
 
         // TODO:
-        // require widget_engine.php
         // construct widget
-        
+        require(sprintf("%s/templates/widget_engine.php", dirname(__FILE__)));
 
         echo $before_widget;
 
-        // TODO:
-        // echo $contructed_widget;
+
+        // BPP Widget Creation
+        $contructed_widget = CreateWidget( $title, $gaTodayData, $gaWeekData, $gaMonthData );
+        echo $contructed_widget;
 
         // TODO:
         // ???? what does this do?
