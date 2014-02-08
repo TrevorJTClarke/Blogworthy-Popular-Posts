@@ -27,61 +27,18 @@ function CreateWrapper ( $widget_title, $today_content, $week_content, $month_co
 function CreateWidget ( $title, $gaTodayData, $gaWeekData, $gaMonthData ) {
     
     //format today data
-    foreach ($gaTodayData as $result) {
-        $getPageviews  = $result->getPageviews();
-        $getHostname = $result->getHostname();
-        $getPagepath = $result->getPagepath();
-        $postPagepath = 'http://'.$getHostname.$getPagepath;
-        $getPostID = url_to_postid($postPagepath);
-        $search_id[] = $getPostID;
-        $todaypageviews[$getPostID] = $getPageviews;
-        $todaypagepath[$getPostID] = $postPagepath;
-    }
-    $BlogWorthy_todaypageviews = $todaypageviews;
-    $BlogWorthy_id = array_unique($search_id);
-    $count = count($BlogWorthy_id);
-    $BlogWorthy_todaypagepath = $todaypagepath;
-
     require(sprintf("%s/today_post_template.php", dirname(__FILE__)));
+    $todayArray = FormatTodayData( $gaTodayData );
     $todayHtmlArray = implode("", $todayArray);
 
     //format week data
-    foreach ($gaWeekData as $weekresult) {
-        $getPageviews = $weekresult->getPageviews();
-        $getHostname = $weekresult->getHostname();
-        $getPagepath = $weekresult->getPagepath();
-        $postPagepath = 'http://'.$getHostname.$getPagepath;
-        $getPostID = url_to_postid($postPagepath);
-        $search_weekid[] = $getPostID;
-        $weeklypageviews[$getPostID] = $getPageviews;
-        $weeklypagepath[$getPostID] = $postPagepath;
-    }
-    $BlogWorthy_weeklypageviews = $weeklypageviews;
-    $BlogWorthy_weekids = array_unique($search_weekid);
-    $countweekid = count($BlogWorthy_weekids);
-    $BlogWorthy_weeklypagepath = $weeklypagepath;
-
     require(sprintf("%s/week_post_template.php", dirname(__FILE__)));
+    $weekArray = FormatWeekData( $gaWeekData );
     $weekHtmlArray = implode("", $weekArray);
 
     // format all data
-    foreach ($gaMonthData as $allresult) {
-        $getPageviews  = $allresult->getPageviews();
-        $getHostname = $allresult->getHostname();
-        $getPagepath = $allresult->getPagepath();
-        $postPagepath = 'http://'.$getHostname.$getPagepath;
-        $getPostID = url_to_postid($postPagepath);
-        $search_allid[] = $getPostID;
-        $allpageviews[$getPostID] = $getPageviews;
-        $allpagepath[$getPostID] = $postPagepath;
-        $BlogWorthy_allpagepath = $allpagepath;
-    }
-    $BlogWorthy_allpageviews = $allpageviews;
-    $BlogWorthy_allids = array_unique($search_allid);
-    $countallid = count($BlogWorthy_allids);
-    $BlogWorthy_allpagepath = $allpagepath;
-
     require(sprintf("%s/month_post_template.php", dirname(__FILE__)));
+    $monthArray = FormatMonthData( $gaMonthData );
     $monthHtmlArray = implode("", $monthArray);
     
     // Construct Widget Html with data
