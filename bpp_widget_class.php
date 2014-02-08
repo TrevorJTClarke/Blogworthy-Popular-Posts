@@ -158,7 +158,6 @@ class BlogWorthyMostViewedPosts extends WP_Widget {
 
         echo $before_widget;
 
-
         // BPP Widget Creation
         $contructed_widget = CreateWidget( $title, $gaTodayData, $gaWeekData, $gaMonthData );
         echo $contructed_widget;

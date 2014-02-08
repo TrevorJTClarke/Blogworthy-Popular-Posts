@@ -9,7 +9,7 @@ require(sprintf("%s/template_engine.php", dirname(__FILE__)));
 // wraps all content after its been formatted
 function CreateWrapper ( $widget_title, $today_content, $week_content, $month_content ) {
     if(!$widget_title){return;}
-    $template = '<div class="bpp_tabs" id="BPP_Popular_Posts">
+    $template = '<div class="bpp_widget_block" id="BPP_Popular_Posts">
                     <div class="bpp_widget_title">' . $widget_title . '</div>
                     <ul class="bpp_tab_container">
                         <li id="bpp_tab1" class="bpp_tab_item">Today</li>

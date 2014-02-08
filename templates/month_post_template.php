@@ -1,6 +1,6 @@
 <?php
 // return the created list content items
-function FormatTodayData( $gaMonthData ){
+function FormatMonthData( $gaMonthData ){
 
     $monthArray = array();
 
