@@ -152,18 +152,6 @@
 .bpp_layout3 {
 
     .bpp_tab_content {
-        display: none;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: auto;
-        max-height: 350px;
-        overflow-y: scroll;
-        overflow-x: hidden;
-
-        &.active {
-            display: block;
-        }
 
         .bpp_list_item {
             background: #f2f2f2;
@@ -176,6 +164,7 @@
             width: 100%;
             font: 400 14px/14px helvetica,arial,sans-serif;
             text-align: left;
+            position: relative;
 
             &:hover,
             &.active {
@@ -203,14 +192,17 @@
             }
 
             .bpp_text_wrap {
-                display: inline-block;
-                width: 60%;
+                color: #FFF;
+                width: 100%;
                 margin: 0;
-                vertical-align: top;
+                padding: 10px;
+                position: absolute;
+                bottom: 0;
+                z-index: 9;
             }
 
             .bpp_list_title {
-                color: #333;
+                color: #FFF;
                 font: 700 14px/14px helvetica,arial,sans-serif;
                 margin: 0 0 10px;
             }

@@ -109,19 +109,6 @@
 .bpp_layout2 .bpp_tab_content .bpp_image_wrap {
   float: right;
 }
-.bpp_layout3 .bpp_tab_content {
-  display: none;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: auto;
-  max-height: 350px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-.bpp_layout3 .bpp_tab_content.active {
-  display: block;
-}
 .bpp_layout3 .bpp_tab_content .bpp_list_item {
   background: #f2f2f2;
   box-sizing: border-box;
@@ -133,6 +120,7 @@
   width: 100%;
   font: 400 14px/14px helvetica, arial, sans-serif;
   text-align: left;
+  position: relative;
 }
 .bpp_layout3 .bpp_tab_content .bpp_list_item:hover,
 .bpp_layout3 .bpp_tab_content .bpp_list_item.active {
@@ -156,13 +144,16 @@
   min-height: 100%;
 }
 .bpp_layout3 .bpp_tab_content .bpp_list_item .bpp_text_wrap {
-  display: inline-block;
-  width: 60%;
+  color: #FFF;
+  width: 100%;
   margin: 0;
-  vertical-align: top;
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  z-index: 9;
 }
 .bpp_layout3 .bpp_tab_content .bpp_list_item .bpp_list_title {
-  color: #333;
+  color: #FFF;
   font: 700 14px/14px helvetica, arial, sans-serif;
   margin: 0 0 10px;
 }
