@@ -8,6 +8,7 @@
 }
 .bpp_widget_block .bpp_widget_title {
   font: 400 21px/24px helvetica, arial, sans-serif;
+  margin: 0 0 10px;
 }
 .bpp_widget_block .bpp_tab_container {
   display: block;
@@ -17,7 +18,7 @@
 }
 .bpp_widget_block .bpp_tab_container .bpp_tab_item {
   background: #f2f2f2;
-  border-bottom: 2px solid rgba(0, 0, 0, 0);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
   color: #333;
   cursor: pointer;
@@ -26,7 +27,7 @@
   margin: 0 0 0 -4px;
   padding: 7px 8px;
   width: 33%;
-  font: 400 14px/14px helvetica, arial, sans-serif;
+  font: 400 12px/12px helvetica, arial, sans-serif;
   text-align: center;
   text-transform: uppercase;
 }
@@ -35,16 +36,26 @@
   background: #e2e2e2;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
+.bpp_widget_block .bpp_tab_container .bpp_tab_item:first-child {
+  margin: 0;
+  width: 34%;
+}
 .bpp_widget_block .bpp_tab_content {
-  display: block;
+  display: none;
   margin: 0;
   padding: 0;
   width: 100%;
+  height: auto;
+  max-height: 350px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.bpp_widget_block .bpp_tab_content.active {
+  display: block;
 }
 .bpp_widget_block .bpp_tab_content .bpp_list_item {
   background: #f2f2f2;
   box-sizing: border-box;
-  color: #333;
   cursor: pointer;
   display: block;
   list-style: none;
@@ -58,6 +69,108 @@
 .bpp_widget_block .bpp_tab_content .bpp_list_item.active {
   background: #e2e2e2;
 }
+.bpp_widget_block .bpp_tab_content .bpp_list_item a {
+  color: #333;
+  text-decoration: none;
+}
+.bpp_widget_block .bpp_tab_content .bpp_list_item .bpp_image_wrap {
+  display: inline-block;
+  width: 30%;
+  height: 75px;
+  overflow: hidden;
+  margin: 0 10px 0 0;
+  vertical-align: top;
+}
+.bpp_widget_block .bpp_tab_content .bpp_list_item .bpp_image_wrap .bpp_list_image {
+  display: inline-block;
+  min-width: 100%;
+  width: 100%;
+  min-height: 100%;
+}
+.bpp_widget_block .bpp_tab_content .bpp_list_item .bpp_text_wrap {
+  display: inline-block;
+  width: 60%;
+  margin: 0;
+  vertical-align: top;
+}
 .bpp_widget_block .bpp_tab_content .bpp_list_item .bpp_list_title {
-  color: #FFF;
+  color: #333;
+  font: 700 14px/14px helvetica, arial, sans-serif;
+  margin: 0 0 10px;
+}
+.bpp_widget_block .bpp_tab_content .bpp_list_item .bpp_list_desc {
+  font: 400 11px/15px helvetica, arial, sans-serif;
+  margin: 0 0 10px;
+}
+.bpp_widget_block .bpp_tab_content .bpp_list_item .bpp_list_views {
+  font: 700 10px/10px helvetica, arial, sans-serif;
+  margin: 0;
+}
+.bpp_layout2 .bpp_tab_content .bpp_image_wrap {
+  float: right;
+}
+.bpp_layout3 .bpp_tab_content {
+  display: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  max-height: 350px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.bpp_layout3 .bpp_tab_content.active {
+  display: block;
+}
+.bpp_layout3 .bpp_tab_content .bpp_list_item {
+  background: #f2f2f2;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font: 400 14px/14px helvetica, arial, sans-serif;
+  text-align: left;
+}
+.bpp_layout3 .bpp_tab_content .bpp_list_item:hover,
+.bpp_layout3 .bpp_tab_content .bpp_list_item.active {
+  background: #e2e2e2;
+}
+.bpp_layout3 .bpp_tab_content .bpp_list_item a {
+  color: #333;
+  text-decoration: none;
+}
+.bpp_layout3 .bpp_tab_content .bpp_list_item .bpp_image_wrap {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  margin: 0;
+  position: relative;
+}
+.bpp_layout3 .bpp_tab_content .bpp_list_item .bpp_image_wrap .bpp_list_image {
+  display: block;
+  min-width: 100%;
+  width: 100%;
+  min-height: 100%;
+}
+.bpp_layout3 .bpp_tab_content .bpp_list_item .bpp_text_wrap {
+  display: inline-block;
+  width: 60%;
+  margin: 0;
+  vertical-align: top;
+}
+.bpp_layout3 .bpp_tab_content .bpp_list_item .bpp_list_title {
+  color: #333;
+  font: 700 14px/14px helvetica, arial, sans-serif;
+  margin: 0 0 10px;
+}
+.bpp_layout3 .bpp_tab_content .bpp_list_item .bpp_list_desc {
+  font: 400 11px/15px helvetica, arial, sans-serif;
+  margin: 0 0 10px;
+}
+.bpp_layout3 .bpp_tab_content .bpp_list_item .bpp_list_views {
+  font: 700 10px/10px helvetica, arial, sans-serif;
+  margin: 0;
 }

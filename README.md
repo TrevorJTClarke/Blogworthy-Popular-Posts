@@ -9,7 +9,6 @@ Website: [Blogworthy](http://blogworthy.com)
 
 ####TODO:
 - set defaults on each ul
-- setup less css
 - setup tab js
 - get real data
 - setup wp debugger
