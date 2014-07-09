@@ -1,0 +1,63 @@
+/**
+ * BPP Less Styling for all layouts
+ */
+.bpp_widget_block {
+  width: 100%;
+  height: auto;
+  margin: 20px auto;
+}
+.bpp_widget_block .bpp_widget_title {
+  font: 400 21px/24px helvetica, arial, sans-serif;
+}
+.bpp_widget_block .bpp_tab_container {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.bpp_widget_block .bpp_tab_container .bpp_tab_item {
+  background: #f2f2f2;
+  border-bottom: 2px solid rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  color: #333;
+  cursor: pointer;
+  display: inline-block;
+  list-style: none;
+  margin: 0 0 0 -4px;
+  padding: 7px 8px;
+  width: 33%;
+  font: 400 14px/14px helvetica, arial, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+}
+.bpp_widget_block .bpp_tab_container .bpp_tab_item:hover,
+.bpp_widget_block .bpp_tab_container .bpp_tab_item.active {
+  background: #e2e2e2;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+.bpp_widget_block .bpp_tab_content {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.bpp_widget_block .bpp_tab_content .bpp_list_item {
+  background: #f2f2f2;
+  box-sizing: border-box;
+  color: #333;
+  cursor: pointer;
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  width: 100%;
+  font: 400 14px/14px helvetica, arial, sans-serif;
+  text-align: left;
+}
+.bpp_widget_block .bpp_tab_content .bpp_list_item:hover,
+.bpp_widget_block .bpp_tab_content .bpp_list_item.active {
+  background: #e2e2e2;
+}
+.bpp_widget_block .bpp_tab_content .bpp_list_item .bpp_list_title {
+  color: #FFF;
+}

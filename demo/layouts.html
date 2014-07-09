@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>BPP Layout Tester</title>
+<link rel="stylesheet" href="../styles/bppstyle.css">
+
+<style>
+    body {
+        padding:0;
+        margin:0;
+    }
+    header {
+        background: rgba(0,0,0,0.8);
+        border-bottom: 1px solid rgba(0,0,0,0.9);
+        box-sizing: border-box;
+        color: #FFF;
+        position: relative;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        font: 400 14px/14px helvetica,arial,sans-serif;
+    }
+    span {
+        margin-top: 5px;
+        font: italic 400 10px/10px helvetica,arial,sans-serif;
+    }
+    .example {
+        width: 300px;
+        margin: 40px auto;
+    }
+</style>
+</head>
+<body>
+    <header>Layout 1<br><span>Shows featured thumbnail on left, with Title, Description and Views on the right.</span></header>
+    <div class="example">
+        <div class="bpp_widget_block bpp_layout1" id="BPP_Popular_Posts">
+            <div class="bpp_widget_title">BPP Widget Title</div>
+            <ul class="bpp_tab_container">
+                <li id="bpp_tab1" class="bpp_tab_item active">Today</li>
+                <li id="bpp_tab2" class="bpp_tab_item">Week</li>
+                <li id="bpp_tab3" class="bpp_tab_item">All Time</li>
+            </ul>
+            <ul id="bpp_content1" class="bpp_tab_content">
+                <li class="bpp_list_item">
+                    <a href="#">
+                        <h3 class="bpp_list_title">Item 1 Title</h3>
+                        <img class="bpp_list_image" src="http://placekitten.com/200/300" alt="Item 1 Title" title="Item 1 Title"/>
+                        <h4 class="bpp_list_desc">Short description for item 1.</h4>
+                        <span class="bpp_list_views">Views: 23</span>
+                    </a>
+                </li>
+                <li class="bpp_list_item">
+                    <a href="#">
+                        <h3 class="bpp_list_title">Item 2 Title</h3>
+                        <img class="bpp_list_image" src="http://placekitten.com/300/301" alt="Item 2 Title" title="Item 2 Title"/>
+                        <h4 class="bpp_list_desc">Short description for item 2.</h4>
+                        <span class="bpp_list_views">Views: 28</span>
+                    </a>
+                </li>
+                <li class="bpp_list_item">
+                    <a href="#">
+                        <h3 class="bpp_list_title">Item 3 Title</h3>
+                        <img class="bpp_list_image" src="http://placekitten.com/200/200" alt="Item 3 Title" title="Item 3 Title"/>
+                        <h4 class="bpp_list_desc">Short description for item 3.</h4>
+                        <span class="bpp_list_views">Views: 16</span>
+                    </a>
+                </li>
+            </ul>
+            <ul id="bpp_content2" class="bpp_tab_content">
+            </ul>
+            <ul id="bpp_content3" class="bpp_tab_content">
+            </ul>
+        </div>
+    </div>
+    <header>Layout 2<br><span>Shows featured thumbnail on left, with Title, Description and Views on the right.</span></header>
+    <div class="example">
+        hey
+    </div>
+    <header>Layout 3<br><span>Shows featured thumbnail on left, with Title, Description and Views on the right.</span></header>
+    <div class="example">
+        yo
+    </div>
+    <header>Default for no results<br></header>
+    <div class="example">
+        TODO!
+    </div>
+</body>
+</html>
